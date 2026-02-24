@@ -37,7 +37,7 @@ st.image(
     use_container_width=True
 )
 
-st.title("💪 72 Saatlik Açlık Sayacı")
+st.title("💪 Alp Coşkuntuna 72 Saatlik Açlık Sayacı")
 
 # ---- SIDEBAR ----
 start_str=st.sidebar.text_input("Başlangıç", "23.02.2026 20:00")
@@ -102,3 +102,4 @@ st.divider()
 st.caption(f"Başlangıç: {start.strftime('%d.%m.%Y %H:%M')}")
 st.caption(f"Bitiş: {finish.strftime('%d.%m.%Y %H:%M')}")
 st.caption(f"Şu an: {now.strftime('%d.%m.%Y %H:%M:%S')}")
+
