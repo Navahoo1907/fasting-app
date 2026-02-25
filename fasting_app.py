@@ -2,6 +2,9 @@ import streamlit as st
 from datetime import datetime, timedelta
 import pytz
 
+# Türkiye saat dilimi
+tz = pytz.timezone("Europe/Istanbul")
+
 # canlı yenileme
 try:
     from streamlit_autorefresh import st_autorefresh
@@ -44,14 +47,17 @@ st.title("💪 Alp için 72 Saatlik Açlık Sayacı !")
 start_str=st.sidebar.text_input("Başlangıç", "23.02.2026 20:00")
 hours=st.sidebar.number_input("Süre (saat)",1,240,72)
 
+# ---- ZAMAN HESABI ----
 start=parse_dt(start_str)
 if not start:
     st.error("Tarih formatı hatalı")
     st.stop()
 
+# 🔴 KRİTİK SATIR → start'ı timezone'lu yapıyoruz
+start = tz.localize(start)
+
 finish=start+timedelta(hours=int(hours))
-tz = pytz.timezone("Europe/Istanbul")
-now = datetime.now(tz)
+now=datetime.now(tz)
 
 remaining=finish-now
 elapsed=now-start
@@ -104,6 +110,3 @@ st.divider()
 st.caption(f"Başlangıç: {start.strftime('%d.%m.%Y %H:%M')}")
 st.caption(f"Bitiş: {finish.strftime('%d.%m.%Y %H:%M')}")
 st.caption(f"Şu an: {now.strftime('%d.%m.%Y %H:%M:%S')}")
-
-
-
