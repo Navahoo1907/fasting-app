@@ -1,5 +1,6 @@
 import streamlit as st
 from datetime import datetime, timedelta
+import pytz
 
 # canlı yenileme
 try:
@@ -49,7 +50,8 @@ if not start:
     st.stop()
 
 finish=start+timedelta(hours=int(hours))
-now=datetime.now()
+tz = pytz.timezone("Europe/Istanbul")
+now = datetime.now(tz)
 
 remaining=finish-now
 elapsed=now-start
@@ -102,5 +104,6 @@ st.divider()
 st.caption(f"Başlangıç: {start.strftime('%d.%m.%Y %H:%M')}")
 st.caption(f"Bitiş: {finish.strftime('%d.%m.%Y %H:%M')}")
 st.caption(f"Şu an: {now.strftime('%d.%m.%Y %H:%M:%S')}")
+
 
 
